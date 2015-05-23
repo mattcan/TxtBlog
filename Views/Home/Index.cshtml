@@ -1,0 +1,21 @@
+@model TxtBlog.ViewModels.Home.IndexViewModel
+@using TxtBlog.ViewModels.Items
+@{
+    ViewBag.Title = "Blog";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (PostViewModel p in Model.Posts) {
+            <section class="post">
+                <section class="post-header">
+                    <h3>@p.Title</h3>
+                    <p>Posted on <time datetime="@p.PostDate">@p.PostDate.ToString("MMMM d, yyyy")</time></p>
+                </section>
+                <section class="post-body">
+                    @Html.Raw(p.Excerpt)
+                </section>
+            </section>
+        }
+    </div>
+</div>

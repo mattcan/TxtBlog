@@ -1,0 +1,65 @@
+@inject IOptions<AppSettings> AppSettings
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@AppSettings.Options.SiteTitle - @ViewBag.Title</title>
+
+        <environment names="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>
+        <environment names="Staging,Production">
+            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+            <link rel="stylesheet" href="~/css/output.min.css" />
+        </environment>
+    </head>
+    <body>
+        <nav rol="navigation" class="main-nav" id="main-nav">
+            <ul id="main-nav-list">
+                <li>
+                    <a asp-controller="Posts" asp-action="Index">
+                        Blog
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="About">
+                        About
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+        <footer>
+            <p>&copy; 2015 - @AppSettings.Options.SiteTitle</p>
+        </footer>
+
+        <environment names="Development">
+            <script src="~/lib/jquery/jquery.js"></script>
+            <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+            <script src="~/lib/hammer.js/hammer.js"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-1.10.2.min.js"
+                    asp-fallback-src="~/lib/jquery/jquery.min.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+            <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+            <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
+                    asp-fallback-src="~/lib/hammer.js/hammer.js"
+                    asp-fallback-test="window.Hammer">
+            </script>
+        </environment>
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

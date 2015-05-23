@@ -1,0 +1,18 @@
+@model IEnumerable<TxtBlog.ViewModels.Items.PostViewModel>
+@using TxtBlog.ViewModels.Items
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (PostViewModel p in Model) {
+            <section class="post">
+                <section class="post-header">
+                    <h3><a href="posts/@p.Title">@p.Title</a></h3>
+                    <p>Posted on <time datetime="@p.PostDate">@p.PostDate.ToString("MMMM d, yyyy")</time></p>
+                </section>
+                <section class="post-body">
+                    <p>@Html.Raw(p.Excerpt)</p>
+                </section>
+            </section>
+        }
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{
+    "AppSettings": {
+        "SiteTitle": "TxtBlog"
+    },
+    "Data": {
+        "DefaultConnection": {
+            "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-TxtBlog-3ad07338-59fb-4076-a888-c461fcae4955;Trusted_Connection=True;MultipleActiveResultSets=true"
+        }
+    }
+}
