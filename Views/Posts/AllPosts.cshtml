@@ -6,7 +6,7 @@
         @foreach (PostViewModel p in Model) {
             <section class="post">
                 <section class="post-header">
-                    <h3><a href="posts/@p.Title">@p.Title</a></h3>
+                    <h3><a href="posts/@p.Slug">@p.Title</a></h3>
                     <p>Posted on <time datetime="@p.PostDate">@p.PostDate.ToString("MMMM d, yyyy")</time></p>
                 </section>
                 <section class="post-body">

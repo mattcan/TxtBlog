@@ -97,6 +97,7 @@ namespace TxtBlog.DAL
                     if (post != null)
                     {
                         post.Content = content;
+                        post.Slug = f.Name.Replace(".md","");
                     }
                 }
 

@@ -22,14 +22,15 @@ namespace TxtBlog.Controllers
             _postRepo = new PostRepository(_appEnvironment);
         }
 
-        [HttpGet, Route("posts/{slug?}")]
-        public ActionResult Index(string slug)
+        [HttpGet]
+        public IActionResult Index()
         {
-            if (string.IsNullOrEmpty(slug) == true)
-            {
-                return View("AllPosts", this.getPosts());
-            }
+            return View("AllPosts", this.getPosts());
+        }
 
+        [HttpGet, Route("posts/{slug}")]
+        public IActionResult Get(string slug)
+        {
             return View("SinglePost", this.getPost(slug));
         }
 
@@ -37,15 +38,7 @@ namespace TxtBlog.Controllers
         {
             Post p = _postRepo.GetPostBySlug(slug);
 
-            return new PostViewModel()
-            {
-                Title = p.Title,
-                Content = CommonMarkConverter.Convert(p.Content),
-                Excerpt = CommonMarkConverter.Convert(p.Excerpt),
-                PostDate = p.Date,
-                IsDraft = p.Draft,
-                Tags = p.Tags
-            };
+            return this.postViewModelFactory(p);
         }
 
         private IEnumerable<PostViewModel> getPosts()
@@ -53,18 +46,24 @@ namespace TxtBlog.Controllers
             List<PostViewModel> posts = new List<PostViewModel>();
             foreach (Post p in _postRepo.GetLastTenPosts())
             {
-                posts.Add(new PostViewModel()
-                {
-                    Title = p.Title,
-                    Content = CommonMarkConverter.Convert(p.Content),
-                    Excerpt = CommonMarkConverter.Convert(p.Excerpt),
-                    PostDate = p.Date,
-                    IsDraft = p.Draft,
-                    Tags = p.Tags
-                });
+                posts.Add(this.postViewModelFactory(p));
             }
 
             return posts;
+        }
+
+        private PostViewModel postViewModelFactory(Post p)
+        {
+            return new PostViewModel()
+            {
+                Title = p.Title,
+                Content = CommonMarkConverter.Convert(p.Content),
+                Excerpt = CommonMarkConverter.Convert(p.Excerpt),
+                PostDate = p.Date,
+                IsDraft = p.Draft,
+                Slug = p.Slug,
+                Tags = p.Tags
+            };
         }
     }
 }
