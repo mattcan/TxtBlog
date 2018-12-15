@@ -1,3 +1,5 @@
+*This project is no longer maintained. It uses a preview version of .NET Core so if you'd like to work on this, I'd suggest starting a new project and taking the ideas. If you really want to take this project over, please reach out to [@mattcan](https://github.com/mattcan).*
+
 # TxtBlog
 
 A dynamic blog using Markdown files
